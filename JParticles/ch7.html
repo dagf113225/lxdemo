@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入所有特效 -->
+    <script src="js/jparticles.all.js"></script>
+    <!-- 推荐：根据需要加载，引入基础框架 -->
+    <script src="js/jparticles.js"></script>
+    <!-- 引入粒子特效 -->
+    <script src="js/particle.js"></script>
+    <script src="js/wave.js"></script>
+    <script src="js/wave_loading.js"></script>
+    <script src="js/snow.js"></script>
+</head>
+<body>
+<!-- 准备一个具有一定宽高的 DOM 元素，不然生成的 Canvas 默认宽高为：485，300 -->
+<div id="demo" style="width: 205px; height: 200px;"></div>
+
+<script>
+    var loading = new JParticles.waveLoading('#demo', {
+
+        // [font style][font weight][font size][font family]
+        // 文本样式，同css一样，必须包含 [font size] 和 [font family]
+        font: 'normal 900 16px Arial',
+
+        smallFont: 'normal 900 14px Arial',
+
+        // 对于不需要自适应的，应该设置为 false，
+        // 减少计算，提高性能
+        resize: false
+    });
+
+    loading
+            .onProgress(function (progress) {
+
+                // 当进度大于等于 60 时，设置进度文本颜色为白色。
+                if (progress >= 60) {
+                    loading.setOptions({
+                        color: '#fff'
+                    });
+                }
+
+                // 返回字符串，文本都应用为 font 样式，不应用 smallFont 相关样式。
+                return '加载中...' + Math.ceil(progress) + '%';
+
+                // 如果返回对象，text 应用为 font 样式，
+                // smallText 应用为 smallFont，smallFontOffsetTop 样式。
+                // return {
+                //     text: '加载中...' + Math.ceil(progress),
+                //     smallText: '%'
+                // }
+            });
+
+    // 调用 `done()` 方法来完成加载。
+    document.querySelector('.done').onclick = function () {
+        loading.done();
+    };
+</script>
+</body>
+</html>

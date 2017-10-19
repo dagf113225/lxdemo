@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入所有特效 -->
+     <script src="js/jparticles.all.js"></script>
+    <!-- 推荐：根据需要加载，引入基础框架 -->
+    <script src="js/jparticles.js"></script>
+    <!-- 引入粒子特效 -->
+    <script src="js/particle.js"></script>
+    <script src="js/wave.js"></script>
+    <script src="js/wave_loading.js"></script>
+    <script src="js/snow.js"></script>
+</head>
+<body>
+<!-- 准备一个具有一定宽高的 DOM 元素，不然生成的 Canvas 默认宽高为：485，300 -->
+<div id="demo" style="width: 485px; height: 300px;"></div>
+
+<script>
+    var settings = {
+        crestHeight: [10, 14, 18],
+        speed: .1
+    };
+
+    // JParticles.utils.extend 等同于 jQuery.extend，你也可以使用 Object.assign 替代。
+    var effect = new JParticles.wave('#demo', JParticles.utils.extend({
+        num: 3,
+        lineColor: ['#e53d27', '#42e527', '#27C9E5'],
+        lineWidth: [.7, .9, 1],
+        offsetTop: .65,
+        rippleNum: 2
+    }, settings));
+
+    // 波动效果
+    document.querySelector('.voice').onmousedown = function () {
+        clearInterval(this.timer);
+        this.timer = setInterval(function () {
+            var crestHeight = settings.crestHeight.map(function (item) {
+
+                // 获取随机波动值
+                item += JParticles.utils.limitRandom(20, -20);
+
+                // 处理 (0, 1) 之间的值为整数
+                if (item < 1 && item > 0) {
+                    item = Math.ceil(item);
+                }
+
+                return item;
+            });
+
+            // 通过 setOptions() 来控制线条的波动
+            effect.setOptions({
+                crestHeight: crestHeight,
+                speed: [.2, .14, .1]
+            });
+        }, 100);
+
+        // 复原
+        var self = this;
+        document.onmouseup = function () {
+            document.onmouseup = null;
+            clearInterval(self.timer);
+            effect.setOptions(settings);
+        };
+    };
+</script>
+</body>
+</html>

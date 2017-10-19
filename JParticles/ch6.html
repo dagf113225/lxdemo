@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入所有特效 -->
+    <script src="js/jparticles.all.js"></script>
+    <!-- 推荐：根据需要加载，引入基础框架 -->
+    <script src="js/jparticles.js"></script>
+    <!-- 引入粒子特效 -->
+    <script src="js/particle.js"></script>
+    <script src="js/wave.js"></script>
+    <script src="js/wave_loading.js"></script>
+    <script src="js/snow.js"></script>
+</head>
+<body>
+<!-- 准备一个具有一定宽高的 DOM 元素，不然生成的 Canvas 默认宽高为：485，300 -->
+<div id="demo" style="width: 485px; height: 300px;"></div>
+
+<script>
+    new JParticles.wave('#demo', {
+        num: 3,
+        // 不填充
+        fill: false,
+        // 绘制边框，即线条
+        line: true
+        // 三条线依次的颜色
+        lineColor: ['rgba(0, 190, 112, .5)', 'rgba(0, 190, 112, .7)', 'rgba(0, 190, 112, .9)'],
+        // 三条线依次的宽度
+        lineWidth: [.5, .7, .9],
+        // 三条线依次距左的偏移值
+        offsetLeft: [2, 1, 0],
+        // 三条线都向上偏移容器高度的 0.75 倍
+        offsetTop: .75,
+        // 三条线依次的波峰高度
+        crestHeight: [10, 14, 18],
+        // 三条线都只有两个波峰（波纹）
+        rippleNum: 2,
+        speed: .1
+    });
+</script>
+</body>
+</html>

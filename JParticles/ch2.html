@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入所有特效 -->
+    <!-- <script src="js/jparticles.all.js"></script> -->
+
+    <!-- 推荐：根据需要加载，引入基础框架 -->
+    <script src="js/jparticles.js"></script>
+    <!-- 引入粒子特效 -->
+    <script src="js/particle.js"></script>
+</head>
+<body>
+<!-- 准备一个具有一定宽高的 DOM 元素，不然生成的 Canvas 默认宽高为：485，300 -->
+<div id="demo" style="width: 100%; height: 650px;"></div>
+
+<script>
+    new JParticles.particle('#demo', {
+        // 两粒子圆心点之间的直线距离为 90
+        proximity: 90,
+        // 定位点半径 100 以内（包含）的所有粒子，圆心点之间小于等于 proximity 值，则连线
+        range: 100
+    });
+</script>
+</body>
+</html>
